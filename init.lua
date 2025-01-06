@@ -35,11 +35,12 @@ vim.api.nvim_create_autocmd('TermOpen', {
 
 --local job_id = 0
 vim.keymap.set("n", "<space>st", function()
+  -- zanim utworzymy patrzymy czy mamy już jakiś taki terminal i bedziemy musieli tam zrobic vsplit
+
   vim.cmd.vnew()
   vim.cmd.term()
   vim.cmd.wincmd("J")
   vim.api.nvim_win_set_height(0, 10)
-
   --job_id = vim.bo.channel
 end)
 
@@ -49,5 +50,8 @@ end)
 
 -- terminal esc quit
 vim.keymap.set("t", "<Esc>", "<C-\\><C-n>")
+
+-- Oil back
+vim.keymap.set("n", "-", "<cmd>Oil<CR>")
 
 -- Co mozna zrobić: jakis skrót do wracania na poczatek funkcji/classy

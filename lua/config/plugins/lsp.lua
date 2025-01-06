@@ -2,6 +2,7 @@ return {
   {
     "neovim/nvim-lspconfig",
     dependencies = {
+      'saghen/blink.cmp',
       {
         "folke/lazydev.nvim",
         ft = "lua", -- only load on lua files
@@ -15,8 +16,15 @@ return {
       },
     },
     config = function()
-      require("lspconfig").lua_ls.setup {}
-      require("lspconfig").pyright.setup {}
+      local capabilities = require('blink.cmp').get_lsp_capabilities()
+
+      require("lspconfig").lua_ls.setup { capabilities = capabilities }
+      require("lspconfig").pyright.setup { capabilities = capabilities }
+      require("lspconfig").ocamllsp.setup { capabilities = capabilities }
+      require("lspconfig").elixirls.setup {
+        capabilities = capabilities,
+        cmd = { "/home/user/elixir-ls-0.26.2/release/language_server.sh" }
+      }
 
       vim.api.nvim_create_autocmd('LspAttach', {
         callback = function(args)
