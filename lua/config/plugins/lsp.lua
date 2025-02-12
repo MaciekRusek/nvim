@@ -11,10 +11,9 @@ return {
       auto_install = true,
       ensure_installed = {
         "lua_ls",
-        "rust_analyzer",
+        "gopls",
         "html",
         "cssls",
-
       }
     },
     dependencies = {
@@ -24,7 +23,7 @@ return {
   {
     "neovim/nvim-lspconfig",
     dependencies = {
-      "saghen/blink.cmp",
+      --"saghen/blink.cmp",
       "williamboman/mason-lspconfig.nvim",
       {
         "folke/lazydev.nvim",
@@ -39,10 +38,16 @@ return {
       },
     },
     config = function()
-      local capabilities = require('blink.cmp').get_lsp_capabilities()
+      -- local capabilities = require('blink.cmp').get_lsp_capabilities()
+      local util = require("lspconfig.util")
 
-      require("lspconfig").lua_ls.setup { capabilities = capabilities }
-      -- require("lspconfig").pyright.setup { capabilities = capabilities }
+      require("lspconfig").lua_ls.setup {}
+      require("lspconfig").gopls.setup {
+        cmd = { "gopls" },
+        filetypes = { "go", "gomod", "gowork", "gotmpl" },
+        root_dir = util.root_pattern("go.work", "go.mod", ".git")
+      }
+      require("lspconfig").pyright.setup {}
       -- require("lspconfig").ocamllsp.setup { capabilities = capabilities }
       -- require("lspconfig").elixirls.setup { capabilities = capabilities }
 

@@ -15,7 +15,6 @@ vim.keymap.set("v", "<space>x", ":lua<CR>")
 vim.keymap.set("n", "<M-j>", "<cmd>cnext<CR>")
 vim.keymap.set("n", "<M-k>", "<cmd>cprev<CR>")
 
-
 vim.api.nvim_create_autocmd('TextYankPost', {
   desc = 'Highlight when yanking (copying) text',
   group = vim.api.nvim_create_augroup('kickstart-highlight-yank', { clear = true }),
@@ -35,7 +34,7 @@ vim.api.nvim_create_autocmd('TermOpen', {
 
 --local job_id = 0
 vim.keymap.set("n", "<space>st", function()
-  -- zanim utworzymy patrzymy czy mamy już jakiś taki terminal i bedziemy musieli tam zrobic vsplit
+  -- zanim utworzymy patrzymy czy mamy już jakiś taki terminal i bedziemy musieli tam zrobic
 
   vim.cmd.vnew()
   vim.cmd.term()
